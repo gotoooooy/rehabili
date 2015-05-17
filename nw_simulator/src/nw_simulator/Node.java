@@ -11,7 +11,7 @@ public abstract class Node {
 	 * メンバ変数
 	 **********************************************/
 	int no;
-	Vector port;
+	ArrayList<Port> port;
 	
 	
 	
@@ -21,24 +21,24 @@ public abstract class Node {
 	// この世に存在する…ただひとつのノード…用
 	Node() {
 		this.no = 0;
-		this.port = new Vector(1);
-		this.port.insertElementAt(new Port(),0);
+		this.port = new ArrayList<Port>(1);
+		this.port.add(new Port());
 	}
 	
 	// 単一NICしか持たないノード用
 	Node(int no) {
 		this.no = no;
-		this.port = new Vector(1);
-		this.port.insertElementAt(new Port(),0);
+		this.port = new ArrayList<Port>(1);
+		this.port.add(new Port());
 	}
 	
 	// 複数NICを持つノード用
 	Node(int no, int portNum) {
 		this.no = no;
-		this.port = new Vector(portNum);
+		this.port = new ArrayList<Port>(portNum);
 		
 		for(int i = 0; i < portNum; i++) {
-			this.port.insertElementAt(new Port(),i);
+			this.port.add(i, new Port());
 		}
 	}
 	
@@ -59,38 +59,33 @@ public abstract class Node {
 	
 	// ケーブルを接続する
 	void connectLink(Link link) {
-		Port port = (Port)this.port.get(0);
-		port.connectLink(link);
+		this.port.get(0).connectLink(link);
+		
 	}
 	
 	// ケーブルを接続する (ポート番号指定版)
 	void connectLink(int portNo, Link link) {
-		Port port = (Port)this.port.get(portNo);
-		port.connectLink(link);
+		this.port.get(portNo).connectLink(link);
 	}
 	
 	// ポートに接続されたケーブルの通信方式を返す
 	boolean getDuplex() {
-		Port port = (Port)this.port.get(0);
-		return getPortDuplex(port);
+		return getPortDuplex(this.port.get(0));
 	}
 	
 	// ポートに接続されたケーブルの通信方式を返す (ポート番号指定版)
 	boolean getDuplex(int portNo) {
-		Port port = (Port)this.port.get(portNo);
-		return getPortDuplex(port);
+		return getPortDuplex(this.port.get(portNo));
 	}
 	
 	// ポートに接続されたケーブルの帯域幅を返す
 	int getBandwidth() {
-		Port port = (Port)this.port.get(0);
-		return getPortBandwidth(port);
+		return getPortBandwidth(this.port.get(0));
 	}
 	
 	// ポートに接続されたケーブルの帯域幅を返す (ポート番号指定版)
 	int getBandwidth(int portNo) {
-		Port port = (Port)this.port.get(portNo);
-		return getPortBandwidth(port);
+		return getPortBandwidth(this.port.get(portNo));
 	}
 	
 
