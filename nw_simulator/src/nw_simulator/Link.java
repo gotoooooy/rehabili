@@ -10,8 +10,8 @@ public class Link {
 	/**********************************************
 	 * メンバ変数
 	 **********************************************/
-	boolean duplex;		// 通信方式 (true:全二重, false:半二重) <=今はなんの意味もない。。。
-	int bandwidth;		// 帯域幅 (Mbps単位)
+	private boolean duplex;		// 通信方式 (true:全二重, false:半二重) <=今はなんの意味もない。。。
+	private int bandwidth;		// 帯域幅 (Mbps単位)
 	
 	
 	
@@ -33,15 +33,15 @@ public class Link {
 
 	
 	/**********************************************
-	 * Publicメソッド
+	 * Protectedメソッド
 	 **********************************************/
 	// 通信方式を返す
-	boolean getDuplex() {
+	protected boolean getDuplex() {
 		return this.duplex;		
 	}
 	
 	// 帯域幅を返す
-	int getBandwidth() {
+	protected int getBandwidth() {
 		return this.bandwidth;
 	}
 }

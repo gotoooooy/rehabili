@@ -10,8 +10,8 @@ public abstract class Node {
 	/**********************************************
 	 * メンバ変数
 	 **********************************************/
-	int no;
-	ArrayList<Port> port;
+	private int no;
+	private ArrayList<Port> port;
 	
 	
 	
@@ -45,46 +45,46 @@ public abstract class Node {
 
 	
 	/**********************************************
-	 * Publicメソッド
+	 * Protectedメソッド
 	 **********************************************/
 	// 管理Noを返す
-	int getNo() {
+	protected int getNo() {
 		return this.no;
 	}
 	
 	// ポート数を返す
-	int getPortNum() {
+	protected int getPortNum() {
 		return this.port.size();
 	}
 	
 	// ケーブルを接続する
-	void connectLink(Link link) {
+	protected void connectLink(Link link) {
 		this.port.get(0).connectLink(link);
 		
 	}
 	
 	// ケーブルを接続する (ポート番号指定版)
-	void connectLink(int portNo, Link link) {
+	protected void connectLink(int portNo, Link link) {
 		this.port.get(portNo).connectLink(link);
 	}
 	
 	// ポートに接続されたケーブルの通信方式を返す
-	boolean getDuplex() {
+	protected boolean getDuplex() {
 		return getPortDuplex(this.port.get(0));
 	}
 	
 	// ポートに接続されたケーブルの通信方式を返す (ポート番号指定版)
-	boolean getDuplex(int portNo) {
+	protected boolean getDuplex(int portNo) {
 		return getPortDuplex(this.port.get(portNo));
 	}
 	
 	// ポートに接続されたケーブルの帯域幅を返す
-	int getBandwidth() {
+	protected int getBandwidth() {
 		return getPortBandwidth(this.port.get(0));
 	}
 	
 	// ポートに接続されたケーブルの帯域幅を返す (ポート番号指定版)
-	int getBandwidth(int portNo) {
+	protected int getBandwidth(int portNo) {
 		return getPortBandwidth(this.port.get(portNo));
 	}
 	
