@@ -11,7 +11,7 @@ public abstract class Node {
 	 * メンバ変数
 	 **********************************************/
 	private int no;
-	private ArrayList<Port> port;
+	protected ArrayList<Port> port;
 	
 	
 	
@@ -38,7 +38,7 @@ public abstract class Node {
 		this.port = new ArrayList<Port>(portNum);
 		
 		for(int i = 0; i < portNum; i++) {
-			this.port.add(i, new Port());
+			this.port.add(i, new Port(i));
 		}
 	}
 	
@@ -55,6 +55,26 @@ public abstract class Node {
 	// ポート数を返す
 	protected int getPortNum() {
 		return this.port.size();
+	}
+	
+	// NIC名を返す
+	protected String getPortName() {
+		return this.port.get(0).getName();
+	}
+	
+	// NIC名を返す (ポート番号指定版)
+	protected String getPortName(int portNo) {
+		return this.port.get(portNo).getName();
+	}
+	
+	// MACアドレスを返す
+	protected String getMacAddr() {
+		return this.port.get(0).getMacAddr();
+	}
+	
+	// MACアドレスを返す (ポート番号指定版)
+	protected String getMacAddr(int portNo) {
+		return this.port.get(portNo).getMacAddr();
 	}
 	
 	// ケーブルを接続する
