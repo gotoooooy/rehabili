@@ -78,24 +78,14 @@ public abstract class Node {
 	}
 	
 	// ケーブルを接続する
-	protected void connectLink(Link link) {
-		this.port.get(0).connectLink(link);
+	protected void connectLink(Link link, int nextNode) {
+		this.port.get(0).connectLink(link, nextNode);
 		
 	}
 	
 	// ケーブルを接続する (ポート番号指定版)
-	protected void connectLink(int portNo, Link link) {
-		this.port.get(portNo).connectLink(link);
-	}
-	
-	// ポートに接続されたケーブルの通信方式を返す
-	protected boolean getDuplex() {
-		return getPortDuplex(this.port.get(0));
-	}
-	
-	// ポートに接続されたケーブルの通信方式を返す (ポート番号指定版)
-	protected boolean getDuplex(int portNo) {
-		return getPortDuplex(this.port.get(portNo));
+	protected void connectLink(int portNo, Link link, int nextNode) {
+		this.port.get(portNo).connectLink(link, nextNode);
 	}
 	
 	// ポートに接続されたケーブルの帯域幅を返す
@@ -108,20 +98,21 @@ public abstract class Node {
 		return getPortBandwidth(this.port.get(portNo));
 	}
 	
+	// 隣接ノードの管理No.を返す
+	protected int getNextNode() {
+		return getNextNode(this.port.get(0).getNextNode());
+	}
+	
+	// 隣接ノードの管理No.を返す (ポート番号指定版)
+	protected int getNextNode(int portNo) {
+		return getNextNode(this.port.get(portNo).getNextNode());
+	}
+	
 
 	
 	/**********************************************
 	 * Privateメソッド
 	 **********************************************/
-	// ポートの利用状況は判断し、接続ケーブルの通信方式を返す
-	private boolean getPortDuplex(Port port) {
-		if(port.getUsage()) {
-			return port.getDuplex();
-		} else {
-			return false;
-		}
-	}
-
 	// ポートの利用状況は判断し、接続ケーブルの帯域幅を返す
 	private int getPortBandwidth(Port port) {
 		if(port.getUsage()) {

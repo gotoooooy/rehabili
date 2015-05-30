@@ -16,6 +16,7 @@ public class Port {
 	private String ipAddr;		// IPアドレス
 	private boolean usage;		// リンク使用状況 (true:リンクアップ, false:リンクダウン)
 	private Link link;			// 接続されているケーブル
+	private int nextNode;		// 隣接ノード管理No.
 	
 	
 	
@@ -78,9 +79,10 @@ public class Port {
 	}
 	
 	// ケーブルを接続する
-	protected void connectLink(Link link) {
-		usage = true;
-		this.link = new Link(link.getDuplex(), link.getBandwidth());
+	protected void connectLink(Link link, int nextNode) {
+		this.usage = true;
+		this.link = new Link(link.getBandwidth());
+		this.nextNode = nextNode;
 	}
 	
 	// 接続ケーブル情報を返す
@@ -88,13 +90,13 @@ public class Port {
 		return this.link;
 	}
 	
-	// 接続ケーブルの通信方式を返す
-	protected boolean getDuplex() {
-		return this.link.getDuplex();
-	}
-	
 	// 接続ケーブルの帯域幅を返す
 	protected int getBandwidth() {
 		return this.link.getBandwidth();
+	}
+	
+	// 隣接ノードの管理No.を返す
+	protected int getNextNode() {
+		return this.nextNode;
 	}
 }
