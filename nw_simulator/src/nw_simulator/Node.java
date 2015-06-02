@@ -42,6 +42,16 @@ public abstract class Node {
 		}
 	}
 	
+	// コピー
+	Node(Node node) {
+		this.no = node.getNo();
+		this.port = new ArrayList<Port>(node.getPortNum());
+		
+		for(int i = 0; i < node.getPortNum(); i++) {
+			this.port.add(i, new Port(i));
+		}
+	}
+	
 
 	
 	/**********************************************
@@ -100,12 +110,12 @@ public abstract class Node {
 	
 	// 隣接ノードの管理No.を返す
 	protected int getNextNode() {
-		return getNextNode(this.port.get(0).getNextNode());
+		return this.port.get(0).getNextNode();
 	}
 	
 	// 隣接ノードの管理No.を返す (ポート番号指定版)
 	protected int getNextNode(int portNo) {
-		return getNextNode(this.port.get(portNo).getNextNode());
+		return this.port.get(portNo).getNextNode();
 	}
 	
 

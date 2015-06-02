@@ -31,15 +31,19 @@ public class Server extends Node {
 		this.arpTable = new HashMap<String, String>(0);
 	}
 	
+	Server(Server server) {
+		super(server);
+		this.arpTable = new HashMap<String, String>(0);
+	}
+	
 
 	
 	/**********************************************
 	 * Protectedメソッド
 	 **********************************************/
-	// ARPテーブルをがっさり受け取って、がっさり設定する　超ズル技！！
+	// ARPテーブルをがっさり受け取って、がっさり設定する　超ズル技！！ <=改修予定
 	protected void setArpTable(Map<String, String> arpTable) {
 		this.arpTable = arpTable;
-		System.out.println("Server:\t" + arpTable);
 	}
 	
 	// IPアドレスを設定する
